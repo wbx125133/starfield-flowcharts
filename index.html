@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARFIELD 业务流程图 - 精简版</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #181c25;
+    --border: #2a2f3a;
+    --text: #e4e8f0;
+    --muted: #7a8299;
+    --accent: #5b9cf5;
+    --green: #42c466;
+    --orange: #e0a030;
+    --purple: #a78bfa;
+    --pink: #f472b6;
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px 60px; }
+
+  h1 {
+    text-align: center; font-size: 26px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .subtitle { text-align: center; color: var(--muted); font-size: 13px; margin-bottom: 48px; }
+
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 36px;
+    overflow-x: auto;
+  }
+  .chart-title {
+    font-size: 16px; font-weight: 600; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .chart-title .num {
+    font-size: 12px; font-weight: 700; color: var(--accent);
+    background: rgba(91,156,245,0.12);
+    padding: 3px 9px; border-radius: 5px;
+  }
+  .chart-title .desc {
+    color: var(--muted); font-size: 13px; font-weight: 400; margin-left: 4px;
+  }
+
+  .chart-card .mermaid svg {
+    max-width: 100%; height: auto;
+    display: block; margin: 0 auto;
+  }
+
+  /* Roadmap table */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th { text-align: left; padding: 10px 14px; background: rgba(91,156,245,0.08); color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--border); }
+  .tbl td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .tbl tr:hover td { color: var(--text); background: rgba(91,156,245,0.03); }
+  .v-tag { font-weight: 700; }
+
+  .footer {
+    text-align: center; color: var(--muted); font-size: 11px;
+    margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border);
+  }
+
+  @media print {
+    body { background: #fff; color: #222; }
+    .chart-card { border-color: #ddd; background: #fafafa; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>STARFIELD 业务流程图</h1>
+<p class="subtitle">精简版 &middot; 9 大核心流程 &middot; 线条串联</p>
+
+<!-- 1. 核心业务总览 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">01</span> 核心业务总览 <span class="desc">获客 → 体验 → 留存 → 变现 → 增长</span></div>
+  <div class="mermaid">
+graph TB
+    subgraph G["🔗 获客"]
+        A1["分享卡扫码"]
+        A2["小红书/抖音"]
+        A3["搜一搜SEO"]
+        A4["合盘邀请"]
+        A5["KOL邀请"]
+    end
+    subgraph E["⭐ 核心体验"]
+        B1["微信登录"] --> B2["生辰输入"] --> B3["AI命理名片"]
+        B3 --> B4["匹配列表"] --> B5["合盘+破冰"] --> B6["聊天"]
+    end
+    subgraph R["💎 留存深化"]
+        C1["好友≥3 沉淀"]
+        C2["AI顾问对话"]
+        C3["星群社区"]
+        C4["身份装扮"]
+    end
+    subgraph M["💰 变现"]
+        D1["合盘解读 9.9"]
+        D2["AI月卡 29.9"]
+        D3["装扮 3-18"]
+        D4["匹配特权 19.9"]
+        D5["虚拟礼物"]
+    end
+    subgraph V["🚀 增长飞轮"]
+        E1["分享名片卡"]
+        E2["合盘邀请卡"]
+        E3["成就分享"]
+    end
+    A1 & A2 & A3 & A4 & A5 --> B1
+    B3 --> E1
+    B6 --> C1
+    B3 --> C2
+    B6 --> C3
+    C1 & C3 --> C4
+    C1 --> D1
+    C2 --> D2
+    C4 --> D3
+    C1 --> D4 & D5
+    B4 --> E2
+    C1 --> E3
+    E1 & E2 & E3 --> A1
+  </div>
+</div>
+
+<!-- 2. FTUE -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">02</span> 注册与首次体验 <span class="desc">触达 → 授权 → 生辰 → 名片 → 匹配 → 聊天</span></div>
+  <div class="mermaid">
+flowchart TD
+    START(("触达")) --> ENTRY{"入口来源"}
+    ENTRY -->|"分享卡"| S1["展示分享者名片"]
+    ENTRY -->|"搜索种草"| S1B["品牌引导页"]
+    ENTRY -->|"合盘邀请"| S1C["合盘悬念页"]
+    S1 & S1B & S1C --> AUTH["微信授权登录"]
+    AUTH --> OK{"授权成功?"}
+    OK -->|"是"| PRIV["隐私协议弹窗"]
+    OK -->|"拒绝"| GUEST["游客预览"]
+    GUEST -.-> AUTH
+    PRIV --> AGR{"同意?"}
+    AGR -->|"是"| DATE["出生日期(必填)"]
+    AGR -->|"否"| X1["退出"]
+    DATE --> TIME{"知道时辰?"}
+    TIME -->|"精确"| T1["选择时辰"]
+    TIME -->|"大概"| T2["选择时段"]
+    TIME -->|"不知道"| T3["跳过"]
+    T1 & T2 & T3 --> CITY["出生城市(可选)"]
+    CITY --> GEN["生成星图"]
+    GEN --> LOAD["等待动画 3-10s"]
+    LOAD --> CHK{"成功?"}
+    CHK -->|"是"| CARD["命理名片展示"]
+    CHK -->|"超时"| FB["基础星座兜底"]
+    FB --> CARD
+    CARD --> CTA{"用户选择"}
+    CTA -->|"分享星图"| SHARE["生成分享卡"]
+    CTA -->|"看谁和我合"| MATCH["匹配列表"]
+    CTA -->|"关闭"| SILENT["沉默·D1召回"]
+    SHARE --> MATCH
+    MATCH --> P{"匹配池"}
+    P -->|"≥50人"| LIST["标准列表"]
+    P -->|"<50人"| THIN["放宽+AI占位"]
+    LIST & THIN --> DETAIL["详情·合盘速览"]
+    DETAIL --> TOPIC["AI破冰话题×3"]
+    TOPIC --> CHAT["发起聊天"]
+    CHAT --> DONE(("首次体验完成"))
+  </div>
+</div>
+
+<!-- 3. 匹配引擎 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">03</span> 匹配引擎数据流 <span class="desc">输入 → 命理计算 → AI解读 → 评分 → 输出</span></div>
+  <div class="mermaid">
+flowchart LR
+    subgraph IN["📥 输入"]
+        I1["出生日期"]
+        I2["时辰(可选)"]
+        I3["城市(可选)"]
+    end
+    subgraph CALC["🧮 本地命理计算"]
+        C1["八字四柱"]
+        C2["太阳星座"]
+        C3["月亮星座"]
+        C4["上升星座"]
+        C5["行星落位"]
+    end
+    subgraph AI["🤖 LLM 解读"]
+        A1["性格标签×3"]
+        A2["核心课题"]
+        A3["缘分类型"]
+        A4["解读文案"]
+    end
+    subgraph SCORE["📊 匹配评分"]
+        M1["五行相似度 0.35"]
+        M2["星座相位 0.30"]
+        M3["标签重合 0.25"]
+        M4["行为相似 0.10"]
+        M0["总分"]
+    end
+    subgraph OUT["📤 输出"]
+        O1["匹配列表"]
+        O2["匹配度%"]
+        O3["匹配原因"]
+        O4["合盘摘要"]
+    end
+    I1 & I2 & I3 --> C1 & C2 & C3 & C4 & C5
+    C1 & C2 & C3 & C4 & C5 --> A1 & A2 & A3 & A4
+    C1 --> M1
+    C2 & C3 & C4 --> M2
+    A1 --> M3
+    M1 & M2 & M3 & M4 --> M0
+    M0 --> O1 & O2
+    A4 --> O3
+    C1 & C2 --> O4
+  </div>
+</div>
+
+<!-- 4. 用户生命周期 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">04</span> 用户生命周期与转化 <span class="desc">四类用户流转 · 转化条件 · 流失节点</span></div>
+  <div class="mermaid">
+flowchart TD
+    TOUCH["触达入口"] --> EX
+    subgraph EX["探索者 · 50-60%新增"]
+        EX1["生成名片"] --> EX2["分享"] --> EX3["浏览匹配"]
+    end
+    EX -->|"D7未回访"| L1["正常流失"]
+    EX -->|"匹配共鸣 15-20%"| SK
+    subgraph SK["孤独寻求者 · 30-40%活跃"]
+        SK1["每日查看匹配"] --> SK2["聊天"] --> SK3["好友≥3"]
+    end
+    SK -->|"匹配无感"| L2["匹配流失"]
+    SK -->|"人生困惑 10-15%"| DP
+    SK -->|"社区表达 5-8%"| BD
+    subgraph DP["深度迷茫者 · ARPU最高"]
+        DP1["AI深度对话"] --> DP2["输入大事"] --> DP3["付费"]
+    end
+    DP -->|"AI套路化"| L3["失望流失"]
+    subgraph BD["身份经营者 · 社区核心"]
+        BD1["发帖"] --> BD2["积累粉丝"] --> BD3["成为KOL"]
+    end
+    BD -->|"无反馈"| L4["沉寂流失"]
+    SEARCH["搜索引擎直达"] -.-> DP
+    COMMUNITY["玄学社区导流"] -.-> BD
+    INVITE["好友合盘邀请"] -.-> SK
+  </div>
+</div>
+
+<!-- 5. 增长裂变 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">05</span> 增长裂变闭环 <span class="desc">种子 → 裂变 → 传播 → 回流 · 目标 50→2000</span></div>
+  <div class="mermaid">
+flowchart TD
+    subgraph SEED["🌱 种子(D1-30)"]
+        S1["高校KOL 15-20人"]
+        S2["小红书 10-15人"]
+        S3["私域 15-20人"]
+        S4["社区 5-10人"]
+    end
+    S1 & S2 & S3 & S4 --> POOL["50个种子用户"]
+    POOL --> USE["使用产品"]
+    USE --> T1["分享名片卡"]
+    USE --> T2["合盘邀请卡"]
+    USE --> T3["成就分享"]
+    USE --> T4["每日彩蛋"]
+    T1 & T2 & T3 & T4 --> CH{"传播渠道"}
+    CH -->|"微信"| C1["点击卡片"]
+    CH -->|"朋友圈"| C2["扫码"]
+    CH -->|"小红书"| C3["点击链接"]
+    C1 & C2 & C3 --> NEW["新用户注册"]
+    NEW --> REG["生成名片"]
+    REG -->|"分享率≥15%"| USE
+    REG -->|"未分享"| RET["留存"] --> T2
+    USE -.-> TGT["🎯 目标: 50→2000人 裂变≥40x"]
+  </div>
+</div>
+
+<!-- 6. 商业化 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">06</span> 商业化与付费流程 <span class="desc">免费 → 触达时机 → 付费 → 续费闭环</span></div>
+  <div class="mermaid">
+flowchart TD
+    subgraph FREE["🆓 免费(D1-90)"]
+        F1["命理名片"]
+        F2["基础匹配"]
+        F3["基础聊天"]
+    end
+    subgraph TRG["⏰ 触达时机"]
+        T1["查看合盘"]
+        T2["AI对话5轮后"]
+        T3["浏览匹配时"]
+        T4["看名片装扮"]
+        T5["聊天中送礼"]
+    end
+    subgraph PAY["💳 付费产品"]
+        P1["合盘解读 9.9"]
+        P2["AI月卡 29.9"]
+        P3["匹配特权 19.9"]
+        P4["名片装扮 3-18"]
+        P5["虚拟礼物 1-50"]
+    end
+    subgraph LOOP["🔄 续费"]
+        R1["满意→试AI顾问"]
+        R2["月卡续费≥30%"]
+        R3["装扮收集"]
+        R4["礼物互赠"]
+    end
+    F1 --> T1 --> P1 --> R1 --> P2 --> R2 --> P2
+    F3 --> T2 --> P2
+    F2 --> T3 --> P3
+    F1 --> T4 --> P4 --> R3 --> P4
+    F3 --> T5 --> P5 --> R4 --> P5
+  </div>
+</div>
+
+<!-- 7. 技术架构 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">07</span> 技术架构数据流 <span class="desc">前端 → 云函数 → AI → 算法 → 数据库</span></div>
+  <div class="mermaid">
+flowchart TB
+    subgraph FE["📱 微信小程序"]
+        FE1["登录"]
+        FE2["生辰输入"]
+        FE3["命理名片"]
+        FE4["匹配列表"]
+        FE5["聊天"]
+        FE6["分享"]
+    end
+    subgraph BE["☁️ 云函数后端"]
+        BE1["用户管理"]
+        BE2["命理服务"]
+        BE3["匹配引擎"]
+        BE4["消息服务"]
+        BE5["内容安全"]
+        BE6["订单服务"]
+    end
+    subgraph AI["🤖 AI 服务"]
+        AI3["统一接口层"]
+        AI1["DeepSeek(主)"]
+        AI2["通义千问(备)"]
+    end
+    subgraph ALG["🧮 命理算法"]
+        A1["八字计算"]
+        A2["星盘计算"]
+    end
+    subgraph DB["🗄️ 数据库"]
+        D1[("用户")]
+        D2[("匹配")]
+        D3[("消息")]
+        D4[("订单")]
+    end
+    FE1 --> BE1
+    FE2 --> BE2
+    BE2 --> A1 & A2
+    A1 & A2 --> AI3
+    AI3 --> AI1
+    AI3 -.->|"故障切换"| AI2
+    AI1 & AI2 --> BE2 --> FE3
+    BE2 --> D1
+    FE4 --> BE3
+    BE3 --> D1
+    BE3 --> D2
+    FE5 --> BE4 --> BE5 --> D3
+    FE6 --> BE6 --> D4
+  </div>
+</div>
+
+<!-- 8. 版本路线 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">08</span> 产品版本演进路径 <span class="desc">V1.0 → V2.0 五阶段 Go/No-Go</span></div>
+  <table class="tbl">
+    <thead>
+      <tr><th>版本</th><th>时间</th><th>核心目标</th><th>Go 决策</th><th>里程碑</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="v-tag" style="color:var(--green)">V1.0</span></td><td>D1-90</td><td>MVP验证</td><td>分享率 &ge;15%</td><td>90天2000用户</td></tr>
+      <tr><td><span class="v-tag" style="color:var(--accent)">V1.1</span></td><td>D90-120</td><td>付费试水</td><td>合盘转化率 &ge;3%</td><td>首笔付费收入</td></tr>
+      <tr><td><span class="v-tag" style="color:var(--purple)">V1.2</span></td><td>D120-180</td><td>社交深化</td><td>AI月卡续费 &ge;30%</td><td>DAU/MAU &ge;25%</td></tr>
+      <tr><td><span class="v-tag" style="color:var(--orange)">V1.3</span></td><td>D180-270</td><td>社区构建</td><td>日均发帖 &ge;50</td><td>社区自运转</td></tr>
+      <tr><td><span class="v-tag" style="color:var(--pink)">V2.0</span></td><td>D270-365</td><td>生态完善</td><td>7日留存 &ge;25%</td><td>iOS/Android上线</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 9. 关键漏斗 -->
+<div class="chart-card">
+  <div class="chart-title"><span class="num">09</span> 关键漏斗与预警 <span class="desc">核心转化率阈值 · 预警信号</span></div>
+  <div class="mermaid">
+flowchart TD
+    L1["触达入口"] -->|"≥70%"| L2["注册完成"]
+    L2 -->|"≥80%"| L3["生成命理名片"]
+    L3 -->|"≥60%"| L4["查看匹配列表"]
+    L4 -->|"≥50%"| L5["点击匹配用户"]
+    L5 -->|"≥20%"| L6["发起聊天"]
+    L6 -->|"≥10%"| L7["添加好友"]
+    L3 -->|"≥15%"| L8["生成分享卡"]
+    W1["⚠ 注册<70% → 简化授权"]:::w
+    W2["⚠ 名片<60% → 时辰可选"]:::w
+    W3["⚠ 点击<30% → 优化算法"]:::w
+    W4["⚠ 留存<25% → 查匹配质量"]:::w
+    L1 -.- W1
+    L2 -.- W2
+    L4 -.- W3
+    L6 -.- W4
+    classDef w fill:#fff3e0,stroke:#ff9800,color:#e65100
+  </div>
+</div>
+
+<p class="footer">STARFIELD 业务流程图 &middot; 精简版 &middot; 2026-04</p>
+
+</div>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  themeVariables: {
+    fontFamily: "-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+    fontSize: '13px',
+    primaryColor: '#1e3a5f',
+    primaryTextColor: '#e4e8f0',
+    primaryBorderColor: '#3b5998',
+    secondaryColor: '#2a1f3d',
+    tertiaryColor: '#1a2332',
+    lineColor: '#5b7a9e',
+    textColor: '#e4e8f0',
+    mainBkg: '#1e3a5f',
+    nodeBorder: '#3b5998',
+    clusterBkg: '#141a24',
+    clusterBorder: '#2a3545',
+    edgeLabelBackground: '#181c25',
+    nodeTextColor: '#e4e8f0'
+  },
+  flowchart: {
+    curve: 'basis',
+    nodeSpacing: 30,
+    rankSpacing: 40,
+    htmlLabels: true,
+    useMaxWidth: true
+  }
+});
+</script>
+</body>
+</html>
